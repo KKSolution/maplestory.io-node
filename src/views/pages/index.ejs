@@ -19,7 +19,12 @@
   </head>
 
   <body>
+    <div id="particles-js"></div>
     <div class="container">
+      <label class="effect-toggle">
+        <span>Turn off effects</span>
+        <input type="checkbox" />
+      </label>
       <div class="content">
         <div class="intro-card">
           <span class="title">MapleStory IO</span><br/>
@@ -39,5 +44,21 @@ All in-game information is provided by a private source.
         </div>
       </div>
     </div>
+    <script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script type="text/javascript" src="/js/particles.js"></script>
+
+    <script>
+      var toggle = document.querySelector('.effect-toggle input')
+      toggle.onchange = function () {
+        pJSDom[0].pJS.particles.move.enable = !toggle.checked
+        if (toggle.checked) {
+          // If we clear it immediately, it might be mid-render and flush the buffer after we clear it
+          setTimeout(function () { pJSDom[0].pJS.fn.canvasClear() }, 100)
+        } else {
+          pJSDom[0].pJS.fn.particlesRefresh()
+        }
+      }
+    </script>
+
   </body>
 </html>
